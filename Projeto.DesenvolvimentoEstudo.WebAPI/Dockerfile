@@ -13,6 +13,11 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Projeto.DesenvolvimentoEstudo.WebAPI/Projeto.DesenvolvimentoEstudo.WebAPI.csproj", "Projeto.DesenvolvimentoEstudo.WebAPI/"]
+COPY ["Projeto.DesenvolvimentoEstudo.IoC/Projeto.DesenvolvimentoEstudo.IoC.csproj", "Projeto.DesenvolvimentoEstudo.IoC/"]
+COPY ["Projeto.DesenvolvimentoEstudo.Application/Projeto.DesenvolvimentoEstudo.Application.csproj", "Projeto.DesenvolvimentoEstudo.Application/"]
+COPY ["Projeto.DesenvolvimentoEstudo.Domain/Projeto.DesenvolvimentoEstudo.Domain.csproj", "Projeto.DesenvolvimentoEstudo.Domain/"]
+COPY ["Projeto.DesenvolvimentoEstudo.Common/Projeto.DesenvolvimentoEstudo.Common.csproj", "Projeto.DesenvolvimentoEstudo.Common/"]
+COPY ["Projeto.DesenvolvimentoEstudo.ORM/Projeto.DesenvolvimentoEstudo.ORM.csproj", "Projeto.DesenvolvimentoEstudo.ORM/"]
 RUN dotnet restore "./Projeto.DesenvolvimentoEstudo.WebAPI/Projeto.DesenvolvimentoEstudo.WebAPI.csproj"
 COPY . .
 WORKDIR "/src/Projeto.DesenvolvimentoEstudo.WebAPI"
