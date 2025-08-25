@@ -1,0 +1,41 @@
+services:
+  projeto.desenvolvimentoestudo.webapi:
+    container_name: projeto_desenvolvimentoestudo_webapi
+    image: ${DOCKER_REGISTRY-}projetodesenvolvimentoestudowebapi
+    build:
+      context: .
+      dockerfile: Projeto.DesenvolvimentoEstudo.WebAPI/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    ports:
+      - "8080"
+      - "8081"
+    networks:
+      - app-network
+    depends_on:
+      projeto.desenvolvimentoestudo.database:
+        condition: service_healthy
+
+  projeto.desenvolvimentoestudo.database:
+    container_name: projeto_desenvolvimentoestudo_database
+    image: postgres:13
+    environment:
+      POSTGRES_DB: DeveloperDB
+      POSTGRES_USER: developer
+      POSTGRES_PASSWORD: test@2025
+    ports:
+      - "5432"
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U developer -d DeveloperDB"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+networks:
+  app-network:
+    driver: bridge
