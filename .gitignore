@@ -10,3 +10,10 @@
 /Projeto.DesenvolvimentoEstudo.Language/obj
 /Projeto.DesenvolvimentoEstudo.ORM/obj
 /Projeto.DesenvolvimentoEstudo.WebAPI/obj
+/bin/Debug
+/Projeto.DesenvolvimentoEstudo.Application/bin/Debug/net8.0
+/Projeto.DesenvolvimentoEstudo.IoC/bin/Debug/net8.0
+/Projeto.DesenvolvimentoEstudo.Domain/bin/Debug/net8.0
+/Projeto.DesenvolvimentoEstudo.Language/bin/Debug/net8.0
+/Projeto.DesenvolvimentoEstudo.ORM/bin/Debug/net8.0
+/Projeto.DesenvolvimentoEstudo.WebAPI/bin/Debug/net8.0
