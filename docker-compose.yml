@@ -11,7 +11,7 @@ services:
       - ASPNETCORE_HTTPS_PORTS=8081
     ports:
       - "8080"
-      - "8081"
+      - "8081" 
     networks:
       - app-network
     depends_on:
