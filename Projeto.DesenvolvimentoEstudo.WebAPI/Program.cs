@@ -5,11 +5,7 @@ using Projeto.DesenvolvimentoEstudo.ORM;
 using Projeto.DesenvolvimentoEstudo.ORM.DefaultTestData;
 
 var builder = WebApplication.CreateBuilder(args);
-
 builder.RegisterDependencies();
-//// Add services to the container.
-//builder.Services.AddControllers();
-//builder.Services.AddEndpointsApiExplorer();
 
 // Customize the application configuration
 builder.Services.AddSwaggerGen();

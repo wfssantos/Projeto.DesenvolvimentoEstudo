@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Projeto.DesenvolvimentoEstudo.Domain.Entities;
 using Projeto.DesenvolvimentoEstudo.Domain.Repositories.Users;
 
 namespace Projeto.DesenvolvimentoEstudo.ORM.Repositories;
@@ -20,7 +21,7 @@ public class UserRepository : IUserRepository
     }
 
     /// <summary>
-    /// List all users asynchronously
+    ///     List all users asynchronously
     /// </summary>
     /// <returns></returns>
     public async Task<IEnumerable<GetAllResponse>> ListAsync(IGetAllRequest filter)
@@ -33,5 +34,18 @@ public class UserRepository : IUserRepository
             Status = user.Status,
             CreatedAt = user.CreatedAt
         }).ToListAsync();
+    }
+
+    /// <summary>
+    ///     Creates a new user in the database
+    /// </summary>
+    /// <param name="user">The user to create</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>The created user</returns>
+    public async Task<User> CreateAsync(User user, CancellationToken cancellationToken = default)
+    {
+        await _context.Users.AddAsync(user, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
+        return user;
     }
 }

@@ -1,15 +1,16 @@
 ﻿using AutoMapper;
 using MediatR;
+using Projeto.DesenvolvimentoEstudo.Application.Users.Queries;
 using Projeto.DesenvolvimentoEstudo.Domain.Repositories.Users;
 
-namespace Projeto.DesenvolvimentoEstudo.Application.Users.Queries;
+namespace Projeto.DesenvolvimentoEstudo.Application.Users.Handlers;
 
-public class ListUserQueryHandler : IRequestHandler<ListUserQuery, IEnumerable<GetAllResponse>>
+public class ListUserHandler : IRequestHandler<ListUserQuery, IEnumerable<GetAllResponse>>
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
 
-    public ListUserQueryHandler(IUserRepository userRepository, IMapper mapper)
+    public ListUserHandler(IUserRepository userRepository, IMapper mapper)
     {
         _userRepository = userRepository;
         _mapper = mapper;
