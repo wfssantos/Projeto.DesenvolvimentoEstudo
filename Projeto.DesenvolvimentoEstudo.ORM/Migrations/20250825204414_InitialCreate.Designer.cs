@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Projeto.DesenvolvimentoEstudo.ORM;
@@ -11,9 +12,11 @@ using Projeto.DesenvolvimentoEstudo.ORM;
 namespace Projeto.DesenvolvimentoEstudo.ORM.Migrations
 {
     [DbContext(typeof(DefaultContext))]
-    partial class DefaultContextModelSnapshot : ModelSnapshot
+    [Migration("20250825204414_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,43 +40,6 @@ namespace Projeto.DesenvolvimentoEstudo.ORM.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Companies", (string)null);
-                });
-
-            modelBuilder.Entity("Projeto.DesenvolvimentoEstudo.Domain.Entities.CompanyAddress", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("gen_random_uuid()");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<Guid>("CompanyId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
-
-                    b.ToTable("CompanyAddresses", (string)null);
                 });
 
             modelBuilder.Entity("Projeto.DesenvolvimentoEstudo.Domain.Entities.CompanyEmail", b =>
@@ -171,17 +137,6 @@ namespace Projeto.DesenvolvimentoEstudo.ORM.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("Projeto.DesenvolvimentoEstudo.Domain.Entities.CompanyAddress", b =>
-                {
-                    b.HasOne("Projeto.DesenvolvimentoEstudo.Domain.Entities.Company", "Company")
-                        .WithMany("Addresses")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
-                });
-
             modelBuilder.Entity("Projeto.DesenvolvimentoEstudo.Domain.Entities.CompanyEmail", b =>
                 {
                     b.HasOne("Projeto.DesenvolvimentoEstudo.Domain.Entities.Company", "Company")
@@ -206,8 +161,6 @@ namespace Projeto.DesenvolvimentoEstudo.ORM.Migrations
 
             modelBuilder.Entity("Projeto.DesenvolvimentoEstudo.Domain.Entities.Company", b =>
                 {
-                    b.Navigation("Addresses");
-
                     b.Navigation("Emails");
 
                     b.Navigation("Phones");
