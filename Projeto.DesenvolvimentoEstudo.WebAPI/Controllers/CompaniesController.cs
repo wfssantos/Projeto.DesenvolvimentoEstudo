@@ -29,4 +29,21 @@ public class CompaniesController : BaseController
         var result = await _mediator.Send(command, cancellationToken);
         return Ok(result);
     }
+
+    [HttpPost("Create")]
+    [ProducesResponseType(typeof(ApiResponseWithData<CreateCompanyResponse>), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Create([FromBody] CreateCompanyRequest request, CancellationToken cancellationToken)
+    {
+        var validator = new CreateCompanyRequestValidator();
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+            return BadRequest(validationResult.Errors);
+
+        var command = _mapper.Map<GetAllCompanyCommand>(request);
+        var response = await _mediator.Send(command, cancellationToken);
+
+        return Created();
+    }
 }

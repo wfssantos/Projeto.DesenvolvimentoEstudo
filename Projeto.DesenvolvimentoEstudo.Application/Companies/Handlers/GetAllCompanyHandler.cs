@@ -20,7 +20,7 @@ public class GetAllCompanyHandler : IRequestHandler<GetAllCompanyCommand, PagedR
     public async Task<PagedResponse<GetAllCompanyResponse>> Handle(GetAllCompanyCommand request, CancellationToken cancellationToken)
     {
         var filtro = _mapper.Map<GetAllCompanyRequest>(request.Filter);
-        var list = await _repository.ListAsync(filtro);
+        var list = await _repository.ListAsync(filtro, cancellationToken);
         return list;
     }
 }

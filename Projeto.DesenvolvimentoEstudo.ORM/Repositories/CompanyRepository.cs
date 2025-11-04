@@ -18,7 +18,7 @@ public class CompanyRepository : ICompanyRepository
         _context = context;
     }
 
-    public async Task<PagedResponse<GetAllCompanyResponse>> ListAsync(GetAllCompanyRequest filter)
+    public async Task<PagedResponse<GetAllCompanyResponse>> ListAsync(GetAllCompanyRequest filter, CancellationToken cancellationToken = default)
     {
         var query = _context.Companies.AsNoTracking();
 
@@ -37,7 +37,7 @@ public class CompanyRepository : ICompanyRepository
                 Id = c.Id,
                 Name = c.Name,
             })
-            .ToListAsync(); //cancellationToken
+            .ToListAsync(cancellationToken);
 
         return new PagedResponse<GetAllCompanyResponse>
         {
@@ -47,5 +47,12 @@ public class CompanyRepository : ICompanyRepository
             PageSize = filter.PageSize,
             Items = items
         };
+    }
+
+    public async Task<Company> CreateAsync(Company company, CancellationToken cancellationToken = default)
+    {
+        await _context.Companies.AddAsync(company, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
+        return company;
     }
 }
