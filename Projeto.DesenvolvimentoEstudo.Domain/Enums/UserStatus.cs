@@ -1,7 +1,7 @@
 ﻿namespace Projeto.DesenvolvimentoEstudo.Model.Enums;
 
 /// <summary>
-/// User's status.
+/// User's Status
 /// </summary>
 public enum UserStatus
 {

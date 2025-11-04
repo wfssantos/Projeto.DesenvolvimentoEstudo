@@ -16,4 +16,6 @@ public class Company : BaseEntity
     public ICollection<CompanyAddress> Addresses { get; set; } = new List<CompanyAddress>();
 
     public ICollection<CompanyEmail> Emails { get; set; } = new List<CompanyEmail>();
+    public ICollection<CompanyProduct> Products { get; set; } = new List<CompanyProduct>();
+    public ICollection<CompanySale> Sales { get; set; } = new List<CompanySale>();
 }
