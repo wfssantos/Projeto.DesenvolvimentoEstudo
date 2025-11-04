@@ -14,6 +14,10 @@ public class DefaultContext : DbContext
     public DefaultContext(DbContextOptions<DefaultContext> options) : base(options) { }
 
     public DbSet<User> Users { get; set; }
+    public DbSet<Company> Companies { get; set; }
+    public DbSet<CompanyAddress> CompaniesAddresses { get; set; }
+    public DbSet<CompanyEmail> CompaniesEmails { get; set; }
+    public DbSet<CompanyPhone> CompaniesPhones { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

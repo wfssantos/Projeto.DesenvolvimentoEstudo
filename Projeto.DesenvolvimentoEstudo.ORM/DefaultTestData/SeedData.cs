@@ -23,6 +23,43 @@ public class SeedData
             );
         }
 
+        if (!db.Companies.Any(item => item.Id == Guid.Parse("d3b07384-d9a1-4f6a-8a6c-5d7a1f1e8c2b")))
+        {
+            db.Companies.AddRange(
+                new Company
+                {
+                    Id = Guid.Parse("d3b07384-d9a1-4f6a-8a6c-5d7a1f1e8c2b"),
+                    Name = "ZODIAC MARITIME LTD"
+                }
+            );
+        }
+
         db.SaveChanges();
+
+        var company = db.Companies.Find(Guid.Parse("d3b07384-d9a1-4f6a-8a6c-5d7a1f1e8c2b"));
+        if (company != null)
+        {
+            company.Addresses.Add(new CompanyAddress() 
+            {
+                Address = "Portman House, 2 Portman Street",
+                City = "London",
+                Code = "W1H 6DU",
+                Country = "United Kingdom"
+            });
+
+            company.Emails.Add(new CompanyEmail()
+            {
+                Email = "vishnu.suresh@zodiac-maritime.com",
+                Contact = "Vishnu Suresh / Tech Assistant"
+            });
+            company.Phones.Add(new CompanyPhone()
+            {
+                Phone = 442073332221,
+                Contact = "Vishnu Suresh / Tech Assistant",
+                Type = "Tel"
+            });
+
+            db.SaveChanges();
+        }        
     }
 }

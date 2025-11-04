@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Projeto.DesenvolvimentoEstudo.Application;
+using Projeto.DesenvolvimentoEstudo.Application.Companies.Mapper;
 using Projeto.DesenvolvimentoEstudo.IoC;
 using Projeto.DesenvolvimentoEstudo.ORM;
 using Projeto.DesenvolvimentoEstudo.ORM.DefaultTestData;

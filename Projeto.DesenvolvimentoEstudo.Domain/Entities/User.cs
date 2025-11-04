@@ -46,6 +46,15 @@ public class User : BaseEntity
     public DateTime? UpdatedAt { get; set; }
 
     /// <summary>
+    /// Activates the user account when create.
+    /// </summary>
+    public void Create()
+    {
+        Status = UserStatus.Active;
+        CreatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
     /// Activates the user account.
     /// </summary>
     public void Activate()
