@@ -1,0 +1,48 @@
+﻿@rendermode InteractiveServer
+
+<div class="top-row px-4 d-flex justify-content-between align-items-center bg-light border-bottom shadow-sm" style="height: 60px;">
+    <!-- Left side: current page -->
+    <div class="fw-bold fs-5 text-primary">
+        @CurrentPageTitle
+    </div>
+
+    <!-- Right side: user info -->
+    <div class="d-flex align-items-center gap-3">
+        @if (User?.IsAuthenticated ?? false)
+        {
+            <span class="text-dark">Hello, @User.Name!</span>
+            <button class="btn btn-outline-danger btn-sm" @onclick="Logout">Logout</button>
+        }
+        else
+        {
+            <button class="btn btn-outline-primary btn-sm" @onclick="Login">Login</button>
+        }
+    </div>
+</div>
+
+@code {
+    private string CurrentPageTitle = "Dashboard";
+    private MockUserInfo User = new MockUserInfo(){ };
+
+    private class MockUserInfo
+    {
+        public bool IsAuthenticated { get; set; }
+        public string? Name { get; set; }
+    }
+
+    private async Task Login()
+    {
+        await Task.Delay(100);
+        User.IsAuthenticated = true;
+        User.Name = "William S";
+        StateHasChanged(); 
+    }
+
+    private async Task Logout()
+    {
+        await Task.Delay(100);
+        User.IsAuthenticated = false;
+        User.Name = string.Empty;
+        StateHasChanged(); 
+    }
+}

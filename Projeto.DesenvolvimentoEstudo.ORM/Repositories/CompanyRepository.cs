@@ -2,10 +2,6 @@
 using Projeto.DesenvolvimentoEstudo.Domain.Common;
 using Projeto.DesenvolvimentoEstudo.Domain.Entities;
 using Projeto.DesenvolvimentoEstudo.Domain.Repositories.Companies;
-using Projeto.DesenvolvimentoEstudo.Domain.Repositories.Users;
-using System.Threading;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using System.Linq;
 
 namespace Projeto.DesenvolvimentoEstudo.ORM.Repositories;
 

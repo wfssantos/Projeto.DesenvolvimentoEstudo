@@ -14,7 +14,7 @@ public class CompanyProductConfiguration : IEntityTypeConfiguration<CompanyProdu
         builder.Property(u => u.Id).HasColumnType("uuid").HasDefaultValueSql("gen_random_uuid()");
 
         builder.Property(u => u.Name).HasMaxLength(100).IsRequired();
-        builder.Property(u => u.Description).HasColumnType("nvarchar(max)").IsRequired();
+        builder.Property(u => u.Description).HasMaxLength(500).IsRequired();
         builder.Property(u => u.Price).IsRequired();
         builder.Property(u => u.StockQuantity).IsRequired();
         builder.Property(u => u.CreatedAt).IsRequired();

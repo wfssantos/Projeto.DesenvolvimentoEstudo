@@ -7,7 +7,7 @@ public class CompanyPhone : BaseEntity
     public CompanyPhone() { }
 
     public Guid CompanyId { get; set; }
-    public Company Company { get; set; } = new();
+    public Company? Company { get; set; }
 
     public Int64 Phone { get; set; } = 0;
     public string Type { get; set; } = string.Empty;

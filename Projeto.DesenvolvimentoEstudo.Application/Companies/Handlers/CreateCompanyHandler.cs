@@ -5,11 +5,6 @@ using Projeto.DesenvolvimentoEstudo.Application.Companies.Response;
 using Projeto.DesenvolvimentoEstudo.Common.Security;
 using Projeto.DesenvolvimentoEstudo.Domain.Entities;
 using Projeto.DesenvolvimentoEstudo.Domain.Repositories.Companies;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Projeto.DesenvolvimentoEstudo.Application.Companies.Handlers;
 

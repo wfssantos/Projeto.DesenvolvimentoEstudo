@@ -46,6 +46,11 @@ public class User : BaseEntity
     public DateTime? UpdatedAt { get; set; }
 
     /// <summary>
+    /// Get the sales 
+    /// </summary>
+    public ICollection<CompanySale> Sales { get; set; } = new List<CompanySale>();
+
+    /// <summary>
     /// Activates the user account when create.
     /// </summary>
     public void Create()

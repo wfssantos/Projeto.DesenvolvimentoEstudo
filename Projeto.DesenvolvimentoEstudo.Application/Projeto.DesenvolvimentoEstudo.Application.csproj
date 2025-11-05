@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Projeto.DesenvolvimentoEstudo.Domain\Projeto.DesenvolvimentoEstudo.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CompaniesProducts\Response\" />
+  </ItemGroup>
+
 </Project>

@@ -8,7 +8,7 @@ public class CompanyProduct : BaseEntity
     public CompanyProduct() { }
 
     public Guid CompanyId { get; set; }
-    public Company Company { get; set; } = new();
+    public Company? Company { get; set; }
 
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
@@ -17,4 +17,6 @@ public class CompanyProduct : BaseEntity
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime? UpdatedAt { get; set; } = null;
     public ProductStatus Status { get; set; }
+
+    public ICollection<CompanySaleItem> CompanySaleItem { get; set; } = new List<CompanySaleItem>();
 }

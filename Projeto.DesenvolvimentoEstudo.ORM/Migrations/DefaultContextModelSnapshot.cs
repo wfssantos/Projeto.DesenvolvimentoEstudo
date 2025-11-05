@@ -133,6 +133,107 @@ namespace Projeto.DesenvolvimentoEstudo.ORM.Migrations
                     b.ToTable("CompanyPhones", (string)null);
                 });
 
+            modelBuilder.Entity("Projeto.DesenvolvimentoEstudo.Domain.Entities.CompanyProduct", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StockQuantity")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("CompanyProducts", (string)null);
+                });
+
+            modelBuilder.Entity("Projeto.DesenvolvimentoEstudo.Domain.Entities.CompanySale", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("SaleNumber")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CompanySales", (string)null);
+                });
+
+            modelBuilder.Entity("Projeto.DesenvolvimentoEstudo.Domain.Entities.CompanySaleItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.Property<Guid>("CompanyProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CompanySaleId")
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal?>("Discount")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyProductId");
+
+                    b.HasIndex("CompanySaleId");
+
+                    b.ToTable("CompanySalesItens", (string)null);
+                });
+
             modelBuilder.Entity("Projeto.DesenvolvimentoEstudo.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -204,6 +305,55 @@ namespace Projeto.DesenvolvimentoEstudo.ORM.Migrations
                     b.Navigation("Company");
                 });
 
+            modelBuilder.Entity("Projeto.DesenvolvimentoEstudo.Domain.Entities.CompanyProduct", b =>
+                {
+                    b.HasOne("Projeto.DesenvolvimentoEstudo.Domain.Entities.Company", "Company")
+                        .WithMany("Products")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("Projeto.DesenvolvimentoEstudo.Domain.Entities.CompanySale", b =>
+                {
+                    b.HasOne("Projeto.DesenvolvimentoEstudo.Domain.Entities.Company", "Company")
+                        .WithMany("Sales")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Projeto.DesenvolvimentoEstudo.Domain.Entities.User", "User")
+                        .WithMany("Sales")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Projeto.DesenvolvimentoEstudo.Domain.Entities.CompanySaleItem", b =>
+                {
+                    b.HasOne("Projeto.DesenvolvimentoEstudo.Domain.Entities.CompanyProduct", "CompanyProduct")
+                        .WithMany("CompanySaleItem")
+                        .HasForeignKey("CompanyProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Projeto.DesenvolvimentoEstudo.Domain.Entities.CompanySale", "CompanySale")
+                        .WithMany("CompanySaleItem")
+                        .HasForeignKey("CompanySaleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CompanyProduct");
+
+                    b.Navigation("CompanySale");
+                });
+
             modelBuilder.Entity("Projeto.DesenvolvimentoEstudo.Domain.Entities.Company", b =>
                 {
                     b.Navigation("Addresses");
@@ -211,6 +361,25 @@ namespace Projeto.DesenvolvimentoEstudo.ORM.Migrations
                     b.Navigation("Emails");
 
                     b.Navigation("Phones");
+
+                    b.Navigation("Products");
+
+                    b.Navigation("Sales");
+                });
+
+            modelBuilder.Entity("Projeto.DesenvolvimentoEstudo.Domain.Entities.CompanyProduct", b =>
+                {
+                    b.Navigation("CompanySaleItem");
+                });
+
+            modelBuilder.Entity("Projeto.DesenvolvimentoEstudo.Domain.Entities.CompanySale", b =>
+                {
+                    b.Navigation("CompanySaleItem");
+                });
+
+            modelBuilder.Entity("Projeto.DesenvolvimentoEstudo.Domain.Entities.User", b =>
+                {
+                    b.Navigation("Sales");
                 });
 #pragma warning restore 612, 618
         }
