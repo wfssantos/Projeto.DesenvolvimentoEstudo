@@ -1,10 +1,11 @@
 {
   "profiles": {
-    "Docker Compose": {
+    "Docker Compose - Both": {
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "projeto.desenvolvimentoestudo.webapi": "StartDebugging"
+        "projeto.desenvolvimentoestudo.webapi": "StartDebugging",
+        "projeto.desenvolvimentoestudo.webblazor": "StartDebugging"
       }
     }
   }
