@@ -18,6 +18,9 @@ public class DefaultContext : DbContext
     public DbSet<CompanyAddress> CompaniesAddresses { get; set; }
     public DbSet<CompanyEmail> CompaniesEmails { get; set; }
     public DbSet<CompanyPhone> CompaniesPhones { get; set; }
+    public DbSet<CompanyProduct> CompaniesProducts { get; set; }
+    public DbSet<CompanySale> CompaniesSales { get; set; }
+    public DbSet<CompanySaleItem> CompaniesSalesItens { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

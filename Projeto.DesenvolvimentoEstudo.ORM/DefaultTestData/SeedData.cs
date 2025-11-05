@@ -59,7 +59,17 @@ public class SeedData
                 Type = "Tel"
             });
 
+            company.Products.Add(new CompanyProduct()
+            {
+                Name = "Apple IPhone 17 - 256 GB",
+                Description = "The latest generation of Apple’s smartphone featuring a refined design, advanced A19 Bionic chip, enhanced battery life, and a stunning edge-to-edge OLED display. Delivers exceptional performance, photography, and AI-powered experiences in a sleek, durable build.",
+                Price = 799,
+                StockQuantity = 17,
+                Status = Domain.Enums.ProductStatus.Active,
+                CreatedAt = DateTime.UtcNow
+            });
+
             db.SaveChanges();
-        }        
+        }
     }
 }

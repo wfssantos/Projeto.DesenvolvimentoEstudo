@@ -13,7 +13,7 @@ public class CompanySale : BaseEntity
     public Guid UserId { get; set; }
     public User User { get; set; } = new();
 
-    public List<CompanySaleItem> Items { get; set; } = new();
+    public List<CompanySaleItem> CompanySaleItem { get; set; } = new();
 
     public int SaleNumber { get; set; } = 0;
     public DateTime CreatedAt { get; set; } = DateTime.Now;
@@ -22,5 +22,5 @@ public class CompanySale : BaseEntity
     /// <summary>
     /// Gets the total price with all itens and after applied disconts
     /// </summary>
-    public decimal TotalAmount => Items.Sum(i => i.TotalItemPrice);
+    public decimal TotalAmount => CompanySaleItem.Sum(i => i.TotalItemPrice);
 }

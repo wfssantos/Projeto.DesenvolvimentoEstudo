@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Projeto.DesenvolvimentoEstudo.Application.Companies.Commands;
+using Projeto.DesenvolvimentoEstudo.Application.CompaniesProducts.Commands;
 using Projeto.DesenvolvimentoEstudo.Application.Users.Commands;
 using Projeto.DesenvolvimentoEstudo.WebAPI.Model.Companies;
+using Projeto.DesenvolvimentoEstudo.WebAPI.Model.Products;
 using Projeto.DesenvolvimentoEstudo.WebAPI.Model.Users;
 
 namespace Projeto.DesenvolvimentoEstudo.WebAPI.Common;
@@ -18,8 +20,9 @@ public class MapProfile : Profile
     {
         CreateMap<GetAllCommand, GetAllUserRequest>().ReverseMap();
         CreateMap<CreateUserRequest, CreateUserCommand>().ReverseMap();
-        //CreateMap<CreateUserResult, CreateUserResponse>();
 
         CreateMap<GetAllCompaniesRequest, GetAllCompanyCommand>().ReverseMap();
+
+        CreateMap<GetAllCompaniesProductsRequest, GetAllCompanyProductCommand>().ReverseMap();
     }
 }

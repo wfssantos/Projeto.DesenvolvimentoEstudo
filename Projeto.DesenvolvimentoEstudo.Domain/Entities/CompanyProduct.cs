@@ -17,4 +17,6 @@ public class CompanyProduct : BaseEntity
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime? UpdatedAt { get; set; } = null;
     public ProductStatus Status { get; set; }
+
+    public ICollection<CompanySaleItem> CompanySaleItem { get; set; } = new List<CompanySaleItem>();
 }
