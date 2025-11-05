@@ -7,7 +7,7 @@ public class CompanyEmail : BaseEntity
     public CompanyEmail() { }
 
     public Guid CompanyId { get; set; }
-    public Company Company { get; set; } = new();
+    public Company? Company { get; set; }
 
     public string Email { get; set; } = string.Empty;
     public string Contact { get; set; } = string.Empty;

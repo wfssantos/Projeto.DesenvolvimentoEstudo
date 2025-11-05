@@ -7,7 +7,7 @@ public class CompanyAddress : BaseEntity
     public CompanyAddress() { }
 
     public Guid CompanyId { get; set; }
-    public Company Company { get; set; } = new();
+    public Company? Company { get; set; }
 
     public string Address { get; set; } = string.Empty;
     public string City { get; set; } = string.Empty;

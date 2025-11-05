@@ -1,20 +1,20 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Projeto.DesenvolvimentoEstudo.Application.CompaniesProducts.Commands;
+using Projeto.DesenvolvimentoEstudo.Application.CompaniesSales.Commands;
 using Projeto.DesenvolvimentoEstudo.WebAPI.Common;
-using Projeto.DesenvolvimentoEstudo.WebAPI.Model.CompaniesProducts;
+using Projeto.DesenvolvimentoEstudo.WebAPI.Model.CompaniesSales;
 
 namespace Projeto.DesenvolvimentoEstudo.WebAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CompaniesProductsController : BaseController
+public class CompaniesSaleController : BaseController
 {
     private readonly IMapper _mapper;
     private readonly IMediator _mediator;
 
-    public CompaniesProductsController(IMediator mediator, IMapper mapper)
+    public CompaniesSaleController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
         _mapper = mapper;
@@ -23,9 +23,9 @@ public class CompaniesProductsController : BaseController
     [HttpGet("GetAll")]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetAll([FromQuery] GetAllCompaniesProductsRequest filter, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetAll([FromQuery] GetAllCompaniesSalesRequest filter, CancellationToken cancellationToken)
     {
-        var command = _mapper.Map<GetAllCompanyProductCommand>(filter);
+        var command = _mapper.Map<GetAllCompanySaleCommand>(filter);
         var result = await _mediator.Send(command, cancellationToken);
         return Ok(result);
     }

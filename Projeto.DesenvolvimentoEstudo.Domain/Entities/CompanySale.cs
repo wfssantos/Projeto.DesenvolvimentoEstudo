@@ -8,12 +8,12 @@ public class CompanySale : BaseEntity
     public CompanySale() { }
 
     public Guid CompanyId { get; set; }
-    public Company Company { get; set; } = new();
+    public Company? Company { get; set; }
 
     public Guid UserId { get; set; }
-    public User User { get; set; } = new();
+    public User? User { get; set; }
 
-    public List<CompanySaleItem> CompanySaleItem { get; set; } = new();
+    public ICollection<CompanySaleItem> CompanySaleItem { get; set; } = new List<CompanySaleItem>();
 
     public int SaleNumber { get; set; } = 0;
     public DateTime CreatedAt { get; set; } = DateTime.Now;
