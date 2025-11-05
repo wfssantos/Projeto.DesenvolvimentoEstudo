@@ -20,3 +20,5 @@
 /.vs
 /Projeto.DesenvolvimentoEstudo.Common/bin/Debug/net8.0
 /Projeto.DesenvolvimentoEstudo.Common/obj
+/Projeto.DesenvolvimentoEstudo.WebBlazor/bin/Debug/net8.0
+/Projeto.DesenvolvimentoEstudo.WebBlazor/obj
