@@ -1,6 +1,6 @@
 services:
   projeto.desenvolvimentoestudo.webapi:
-    container_name: projeto_desenvolvimentoestudo_webapi
+    container_name: API
     image: ${DOCKER_REGISTRY-}projetodesenvolvimentoestudowebapi
     build:
       context: .
@@ -10,16 +10,52 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
     ports:
-      - "8080"
-      - "8081" 
+      - "8080:8080"
+      - "8081:8081"
     networks:
       - app-network
     depends_on:
       projeto.desenvolvimentoestudo.database:
         condition: service_healthy
 
+  projeto.desenvolvimentoestudo.authazurefunctions:
+    container_name: API-AuthAzureFunctions
+    build:
+      context: .
+      dockerfile: Projeto.DesenvolvimentoEstudo.AuthAzureFunctions/Dockerfile
+    environment:
+      - FUNCTIONS_WORKER_RUNTIME=dotnet
+      - AzureWebJobsStorage=UseDevelopmentStorage=true
+    ports:
+      - "7072:80"
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost/ > /dev/null || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  projeto.desenvolvimentoestudo.database:
+    container_name: DB
+    image: postgres:13
+    environment:
+        POSTGRES_DB: DeveloperDB
+        POSTGRES_USER: developer
+        POSTGRES_PASSWORD: test@2025
+    ports:
+        - "5432:5432"
+    networks:
+        - app-network
+    restart: unless-stopped
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U developer -d DeveloperDB"]
+        interval: 5s
+        timeout: 3s
+        retries: 5
+
   projeto.desenvolvimentoestudo.webblazor:
-    container_name: projeto_desenvolvimentoestudo_webblazor
+    container_name: Blazor
     image: ${DOCKER_REGISTRY-}projetodesenvolvimentoestudowebblazor
     build:
       context: .
@@ -27,32 +63,15 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8090
-      - ASPNETCORE_HTTPS_PORTS=8091
     ports:
       - "8090:8090"
-      - "8091:8091"
     networks:
       - app-network
     depends_on:
-      - projeto.desenvolvimentoestudo.webapi
-
-  projeto.desenvolvimentoestudo.database:
-    container_name: projeto_desenvolvimentoestudo_database
-    image: postgres:13
-    environment:
-      POSTGRES_DB: DeveloperDB
-      POSTGRES_USER: developer
-      POSTGRES_PASSWORD: test@2025
-    ports:
-      - "5432:5432"
-    networks:
-      - app-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U developer -d DeveloperDB"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
+      projeto.desenvolvimentoestudo.webapi:
+        condition: service_started
+      projeto.desenvolvimentoestudo.authazurefunctions:
+        condition: service_started
 
 networks:
   app-network:
