@@ -5,7 +5,9 @@
       "commandVersion": "1.0",
       "serviceActions": {
         "projeto.desenvolvimentoestudo.webapi": "StartDebugging",
-        "projeto.desenvolvimentoestudo.webblazor": "StartDebugging"
+        "projeto.desenvolvimentoestudo.webblazor": "StartDebugging",
+        "projeto.desenvolvimentoestudo.authazurefunctions": "StartWithoutDebugging",
+        "projeto.desenvolvimentoestudo.database": "StartWithoutDebugging"
       }
     }
   }

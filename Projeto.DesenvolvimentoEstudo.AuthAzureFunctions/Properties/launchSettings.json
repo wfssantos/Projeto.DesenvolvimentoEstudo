@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Projeto_Desenvolvimento_AuthAzureFunctions": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7283",
+      "launchBrowser": false
+    }
+  }
+}
