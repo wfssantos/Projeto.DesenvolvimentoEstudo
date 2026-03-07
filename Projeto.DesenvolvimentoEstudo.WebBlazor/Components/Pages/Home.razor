@@ -1,7 +1,126 @@
 ﻿@page "/"
+@rendermode InteractiveServer
+
+@using System
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="container py-4">
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <div>
+            <h2 class="mb-1">Curriculum Vitae</h2>
+            <div class="text-muted">William Santos • Senior .NET Specialist / Tech Lead</div>
+        </div>
 
-Welcome to your new app.
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-secondary btn-sm" @onclick="ToggleCompact">
+                @(isCompact ? "Expanded view" : "Compact view")
+            </button>
+            <button class="btn btn-outline-primary btn-sm" @onclick="ToggleTheme">
+                @(isDark ? "Light theme" : "Dark theme")
+            </button>
+        </div>
+    </div>
+
+    <hr class="my-3" />
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="@GetTabButtonClass(LanguageTab.En)"
+                    type="button"
+                    role="tab"
+                    aria-selected="@(activeTab == LanguageTab.En)"
+                    @onclick="() => SetTab(LanguageTab.En)">
+                English
+            </button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+            <button class="@GetTabButtonClass(LanguageTab.Pt)"
+                    type="button"
+                    role="tab"
+                    aria-selected="@(activeTab == LanguageTab.Pt)"
+                    @onclick="() => SetTab(LanguageTab.Pt)">
+                Português
+            </button>
+        </li>
+    </ul>
+
+    <!-- Tab content -->
+    <div class="@GetContentWrapperClass() mt-3">
+
+        @if (activeTab == LanguageTab.En)
+        {
+            <div class="cv-card">
+                <h3 class="cv-title">Professional Objective</h3>
+                <p class="cv-text">
+                    Senior .NET Specialist and Tech Lead with over 24 years of experience building scalable, secure,
+                    and results-oriented enterprise solutions. Strong hands-on expertise with C#, .NET Core, REST APIs,
+                    microservices, and Azure DevOps. I contribute from architecture decisions to production delivery,
+                    always focusing on performance, quality, and business continuity.
+                </p>
+
+                <h3 class="cv-title mt-4">Professional Qualifications</h3>
+                <ul class="cv-list">
+                    <li>C#, ASP.NET, .NET Core (JavaScript, Bootstrap, HTML, CSS).</li>
+                    <li>Microservices and APIs with RESTful and SOAP (Postman, SOAPUI, Swagger).</li>
+                    <li>Cloud processes such as CI/CD, libraries, blobs, Azure DevOps.</li>
+                    <li>Unit and integration test automation.</li>
+                    <li>ORM (ADO.NET, Entity Framework, LINQ, Dapper).</li>
+                    <li>Databases: Oracle, SQL Server, MongoDB.</li>
+                    <li>Version control tools: SVN, TFS, Git.</li>
+                    <li>File structures: XML, CSV, JSON.</li>
+                    <li>Other: effort estimation, requirements gathering, Scrum, Kanban, Jenkins, SonarQube, Jira.</li>
+                    <li>Architectures: TDD, DDD, Monoliths, Microservices, Clean Architecture.</li>
+                </ul>
+            </div>
+        }
+        else
+        {
+            <div class="cv-card">
+                <h3 class="cv-title">Objetivo Profissional</h3>
+                <p class="cv-text">
+                    Especialista .NET Sênior e Tech Lead com mais de 24 anos de experiência desenvolvendo soluções
+                    corporativas escaláveis, seguras e orientadas a resultado. Atuo fortemente com C#, .NET Core,
+                    APIs REST, microsserviços e Azure DevOps, participando desde decisões de arquitetura até a entrega
+                    em produção, sempre com foco em performance, qualidade e continuidade do negócio.
+                </p>
+
+                <h3 class="cv-title mt-4">Qualificação Profissional</h3>
+                <ul class="cv-list">
+                    <li>C#, ASP.NET e .NET Core (JavaScript, Bootstrap, HTML e CSS).</li>
+                    <li>Microsserviços e APIs com RESTful e SOAP (Postman, SOAPUI e Swagger).</li>
+                    <li>Processos na nuvem como CI/CD, Library, Blobs, Azure DevOps.</li>
+                    <li>Automação de testes unitários e integrados.</li>
+                    <li>ORM (ADO, Entity Framework, LINQ, Dapper).</li>
+                    <li>Bancos de dados: Oracle, SQL Server, MongoDB.</li>
+                    <li>Ferramentas de versionamento: SVN, TFS, Git.</li>
+                    <li>Estruturas de arquivos: XML, CSV e JSON.</li>
+                    <li>Outros: estimativa de esforços, levantamento de requisitos, Scrum, Kanban, Jenkins, SonarQube, Jira.</li>
+                    <li>Arquiteturas: TDD, DDD, Monolíticos, Microsserviços, Clean.</li>
+                </ul>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private enum LanguageTab { En, Pt }
+
+    private LanguageTab activeTab = LanguageTab.En;
+    private bool isCompact = false;
+    private bool isDark = false;
+
+    private void SetTab(LanguageTab tab) => activeTab = tab;
+
+    private void ToggleCompact() => isCompact = !isCompact;
+
+    private void ToggleTheme() => isDark = !isDark;
+
+    private string GetTabButtonClass(LanguageTab tab)
+        => tab == activeTab ? "nav-link active" : "nav-link";
+
+    private string GetContentWrapperClass()
+        => isDark ? "cv-wrapper cv-dark" : "cv-wrapper";
+}

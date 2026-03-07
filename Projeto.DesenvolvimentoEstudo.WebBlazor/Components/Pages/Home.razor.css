@@ -1,0 +1,50 @@
+﻿.cv-wrapper {
+    border: 1px solid rgba(0,0,0,.08);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 18px;
+    background: #fff;
+}
+
+.cv-dark {
+    background: #0f172a;
+    color: #e5e7eb;
+    border-color: rgba(255,255,255,.12);
+}
+
+.cv-card {
+    border-radius: 12px;
+    padding: 16px;
+    background: rgba(0,0,0,.02);
+}
+
+.cv-dark .cv-card {
+    background: rgba(255,255,255,.05);
+}
+
+.cv-title {
+    font-weight: 700;
+    letter-spacing: .2px;
+    margin-bottom: 8px;
+}
+
+.cv-text {
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+.cv-list {
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding-left: 18px;
+    line-height: 1.65;
+}
+
+/* Optional compact mode */
+.cv-compact .cv-wrapper {
+    padding: 12px;
+}
+
+.cv-compact .cv-card {
+    padding: 12px;
+}
