@@ -1,5 +1,3 @@
- TODO: stop container 'projeto.desenvolvimentoestudo.authazurefunctions' and run manual => func start --port 7072 (debbug mod)
-
 # Projeto.DesenvolvimentoEstudo
 
 # Developer Evaluation Project
